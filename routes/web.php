@@ -12,22 +12,19 @@ use App\Http\Controllers\Admin\ServiceRecordController;
 use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\Admin\AttendanceController;
 
+ 
 
-Route::get('/mail-debug', function () {
-    dd(config('mail.mailers.smtp'));
-});
-
-Route::get('/test-mail', function () {
-    try {
-        Mail::raw('SMTP Brevo test mail', function ($message) {
-            $message->to('amgo@mailinator.com')
-                    ->subject('SMTP Test');
-        });
-        return 'Mail sent! amgo@mailinator.com';
-    } catch (\Exception $e) {
-        return $e->getMessage();
-    }
-});
+// Route::get('/test-mail', function () {
+//     try {
+//         Mail::raw('SMTP Brevo test mail', function ($message) {
+//             $message->to('amgo@mailinator.com')
+//                     ->subject('SMTP Test');
+//         });
+//         return 'Mail sent! amgo@mailinator.com';
+//     } catch (\Exception $e) {
+//         return $e->getMessage();
+//     }
+// });
 
 
 /*

@@ -13,6 +13,8 @@ class ActivityLogHelper
      */
     public static function log($action, $model = null, $description = null, $oldValues = null, $newValues = null)
     {
+
+        
         try {
             $user = Auth::user();
             
