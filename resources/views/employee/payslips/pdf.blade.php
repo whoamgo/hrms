@@ -1,144 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="hi">
 <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Salary Slip - {{ $payslip->month }} {{ $payslip->year }}</title>
+
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "DejaVu Sans", sans-serif;
             margin: 20px;
+            font-size: 12px;
         }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
         .company_logo {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .company_logo img {
             max-width: 100px;
         }
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .Payslip_Item ul {
+
+        ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
-        .Payslip_Item li {
-            margin-bottom: 8px;
+
+        li {
+            margin-bottom: 6px;
         }
+
         .mid_hd {
             text-align: center;
-            margin: 20px 0;
             padding: 10px;
             background-color: #f0f0f0;
+            margin: 20px 0;
+            font-weight: bold;
         }
-        .mid_hd_new {
-            margin-top: 30px;
-        }
+
         .note_payslip {
             text-align: center;
             margin-top: 30px;
             font-style: italic;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .row {
-            display: flex;
-            margin-bottom: 20px;
-        }
-        .col-6 {
-            width: 50%;
-            padding: 0 10px;
-        }
     </style>
 </head>
+
 <body>
+
+    <!-- Logo -->
     <div class="company_logo">
         <img src="{{ public_path('assets/images/logo.png') }}" alt="Logo">
     </div>
-    
-    <div class="header">
-        <h5>राजस्थान सरकार</h5>
-        <p>सामाजिक लेखा परीक्षा, जवाबदेही एवं पारदर्शिता सोसायटी (SSAAT), राजस्थान, जयपुर</p>
-        <p><strong>राजकीय पारदर्शिता, सामाजिक उतरदायित्व</strong></p>
-    </div>
-    
-    <div class="row">
-        <div class="col-6">
-            <div class="Payslip_Item">
-                <ul>
-                    <li><strong>Month </strong>{{ $payslip->month }}, {{ $payslip->year }}</li>
-                    <li><strong>Employee Name </strong>{{ $employee->full_name }}</li>
-                    <li><strong>Department </strong>{{ $employee->department ?? 'N/A' }}</li>
-                    <li><strong>Location </strong>{{ $employee->address ? explode(',', $employee->address)[0] : 'Jaipur, Rajasthan' }}</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="Payslip_Item">
-                <ul>
-                    <li><strong>Date Of Joining </strong>{{ $employee->date_of_joining ? $employee->date_of_joining->format('d/m/Y') : 'N/A' }}</li>
-                    <li><strong>Days Payable </strong>{{ number_format($payslip->days_payable, 2) }}</li>
-                    <li><strong>Account No </strong>{{ $employee->bank_account_number ?? 'N/A' }}</li>
-                    <li><strong>Pan Card No </strong>N/A</li>
-                </ul>
-            </div>
-        </div>
+
+    <!-- Header -->
+    <div class="text-center">
+        <h4>Government of Rajasthan</h4>
+        <p>Social Audit, Accountability and Transparency Society (SSAAT), Rajasthan, Jaipur</p>
+        <p><strong>Government Transparency and Social Accountability</strong></p>
     </div>
 
-    <div class="mid_hd">
-        <h5>Visual Examples of Earnings and Deductions</h5>
-    </div>
-
-    <div class="row">
-        <div class="col-6">
-            <div class="Payslip_Item">
+    <!-- Employee Details -->
+    <table>
+        <tr>
+            <td width="50%" valign="top">
                 <ul>
-                    <li><strong>Basic Salary </strong>{{ number_format($payslip->basic_salary, 2) }}</li>
-                    <li><strong>HRA </strong>{{ number_format($payslip->hra, 2) }}</li>
-                    <li><strong>Conveyance Allowance </strong>{{ number_format($payslip->conveyance_allowance, 2) }}</li>
-                    <li><strong>Medical Allowance </strong>{{ number_format($payslip->medical_allowance, 2) }}</li>
-                    <li><strong>Special Allowance </strong>{{ number_format($payslip->special_allowance, 2) }}</li>
+                    <li><strong>Month :</strong> {{ $payslip->month }}, {{ $payslip->year }}</li>
+                    <li><strong>Employee Name :</strong> {{ $employee->full_name }}</li>
+                    <li><strong>Department :</strong> {{ $employee->department ?? 'N/A' }}</li>
+                    <li><strong>Location :</strong>
+                        {{ $employee->address ? explode(',', $employee->address)[0] : 'Jaipur, Rajasthan' }}
+                    </li>
                 </ul>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="Payslip_Item">
+            </td>
+
+            <td width="50%" valign="top">
                 <ul>
-                    <li><strong>ESI </strong>{{ number_format($payslip->esi, 2) }}</li>
-                    <li><strong>PF </strong>{{ number_format($payslip->pf, 2) }}</li>
-                    <li><strong>TDS </strong>{{ number_format($payslip->tds, 2) }}</li>
-                    <li><strong>10 % Deduction </strong>{{ number_format($payslip->deduction_10_percent, 2) }}</li>
-                    <li><strong>Mobile Deduction </strong>{{ number_format($payslip->mobile_deduction, 2) }}</li>
-                    <li><strong>Comp Off </strong>{{ number_format($payslip->comp_off, 2) }}</li>
+                    <li><strong>Date Of Joining :</strong>
+                        {{ $employee->date_of_joining ? $employee->date_of_joining->format('d/m/Y') : 'N/A' }}
+                    </li>
+                    <li><strong>Days Payable :</strong> {{ number_format($payslip->days_payable, 2) }}</li>
+                    <li><strong>Account No :</strong> {{ $employee->bank_account_number ?? 'N/A' }}</li>
+                    <li><strong>Pan Card No :</strong> N/A</li>
                 </ul>
-            </div>
-        </div>
-    </div>
+            </td>
+        </tr>
+    </table>
 
-    <div class="mid_hd mid_hd_new">
-        <div class="row">
-            <div class="col-6">
-                <div class="Payslip_Item text-center">
-                    <ul>
-                        <li><strong>Total </strong>{{ number_format($payslip->total_earnings, 2) }}</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="Payslip_Item text-center">
-                    <ul>
-                        <li><strong>Salary Payable </strong>{{ number_format($payslip->salary_payable, 2) }}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Earnings / Deductions Heading -->
+    <div class="mid_hd">Earnings and Deductions</div>
 
-    <p class="note_payslip">Note: THIS IS A COMPUTER-GENERATED DOCUMENT AND IT DOES NOT REQUIRE A SIGNATURE.</p>
+    <!-- Earnings & Deductions -->
+    <table>
+        <tr>
+            <td width="50%" valign="top">
+                <ul>
+                    <li><strong>Basic Salary :</strong> &#8377;{{ number_format($payslip->basic_salary, 2) }}</li>
+                    <li><strong>HRA :</strong> &#8377;{{ number_format($payslip->hra, 2) }}</li>
+                    <li><strong>Conveyance Allowance :</strong> &#8377;{{ number_format($payslip->conveyance_allowance, 2) }}</li>
+                    <li><strong>Medical Allowance :</strong> &#8377;{{ number_format($payslip->medical_allowance, 2) }}</li>
+                    <li><strong>Special Allowance :</strong> &#8377;{{ number_format($payslip->special_allowance, 2) }}</li>
+                </ul>
+            </td>
+
+            <td width="50%" valign="top">
+                <ul>
+                    <li><strong>ESI :</strong> &#8377;{{ number_format($payslip->esi, 2) }}</li>
+                    <li><strong>PF :</strong> &#8377;{{ number_format($payslip->pf, 2) }}</li>
+                    <li><strong>TDS :</strong> &#8377;{{ number_format($payslip->tds, 2) }}</li>
+                    <li><strong>10% Deduction :</strong> &#8377;{{ number_format($payslip->deduction_10_percent, 2) }}</li>
+                    <li><strong>Mobile Deduction :</strong> &#8377;{{ number_format($payslip->mobile_deduction, 2) }}</li>
+                    <li><strong>Comp Off :</strong> &#8377;{{ number_format($payslip->comp_off, 2) }}</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Total & Payable -->
+    <table class="mid_hd">
+        <tr>
+            <td width="50%" align="center">
+                <strong>Total Earnings :</strong>
+                &#8377;{{ number_format($payslip->total_earnings, 2) }}
+            </td>
+            <td width="50%" align="center">
+                <strong>Salary Payable :</strong>
+                &#8377;{{ number_format($payslip->salary_payable, 2) }}
+            </td>
+        </tr>
+    </table>
+
+    <!-- Footer Note -->
+    <p class="note_payslip">
+        Note: THIS IS A COMPUTER-GENERATED DOCUMENT AND IT DOES NOT REQUIRE A SIGNATURE.
+    </p>
+
 </body>
 </html>
-
-

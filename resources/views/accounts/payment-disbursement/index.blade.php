@@ -19,7 +19,7 @@
         <div class="card-box">
             <form id="filter-form">
                 <div class="row">
-                    <div class="col-xl-3 col-md-4">
+                    <div class="col-xl-3 col-md-4" style="display: none;">
                         <div class="form-group">
                             <label>Role</label>
                             <select class="form-control" id="filter_role" name="role">
@@ -122,10 +122,10 @@
                             <div class="form-group">
                                 <label>Role <span class="text-danger">*</span></label>
                                 <select class="form-control" id="role" name="role" required>
-                                    <option value="">Select Role</option>
-                                    @foreach($roles as $role)
-                                        <option value="{{ $role->slug }}">{{ $role->name }}</option>
-                                    @endforeach
+                                     <option value="employee">Employee</option>
+                                    <!-- @foreach($roles as $role) -->
+                                        
+                                    <!-- @endforeach -->
                                 </select>
                                 <span class="text-danger error-text role_error"></span>
                             </div>
@@ -290,8 +290,11 @@ $(document).ready(function() {
     });
 
     // Load employees when role changes
-    $('#role').on('change', function() {
+   $(document).ready(function() {
+
         var roleSlug = $(this).val();
+        var roleSlug = 'employee';
+        //alert(roleSlug)
         var employeeSelect = $('#employee_id');
         employeeSelect.html('<option value="">Loading...</option>');
         
@@ -299,7 +302,7 @@ $(document).ready(function() {
             $.ajax({
                 url: '{{ route("accounts.payment.employees-by-role") }}',
                 type: 'GET',
-                data: { role: roleSlug },
+                data: { role: 'employee' },
                 success: function(response) {
                     if (response.success) {
                         employeeSelect.html('<option value="">Select Employee</option>');
@@ -310,7 +313,7 @@ $(document).ready(function() {
                 }
             });
         } else {
-            employeeSelect.html('<option value="">Select Employee</option>');
+            employeeSelect.html('<option value="">Select Employee...</option>');
         }
     });
 

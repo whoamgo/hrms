@@ -146,6 +146,13 @@ class ReportController extends Controller
             $sheet = $spreadsheet->getActiveSheet();
             $sheet->setTitle($reportType);
 
+
+            if (json_last_error() !== JSON_ERROR_NONE || !is_array($data)) {
+                return response()->json([
+                    'message' => 'Invalid report data received'
+                ], 422);
+            }
+
             // Set headers
             $headers = [];
             if ($reportType == 'Leave Report') {
@@ -168,50 +175,84 @@ class ReportController extends Controller
                 $sheet->setCellValue($col . '1', $header);
                 $sheet->getStyle($col . '1')->applyFromArray($headerStyle);
                 $col++;
-            }
+            }   
 
-            // Add data
+
+
             $row = 2;
+
             foreach ($data as $index => $item) {
+
                 $col = 'A';
+
                 if ($reportType == 'Leave Report') {
-                    $sheet->setCellValue($col++, $index + 1);
-                    $sheet->setCellValue($col++, $item['employee']['full_name'] ?? 'N/A');
-                    $sheet->setCellValue($col++, $item['employee']['employee_type'] ?? 'N/A');
-                    $sheet->setCellValue($col++, $item['employee']['department'] ?? 'N/A');
-                    $sheet->setCellValue($col++, $item['leave_type'] == 'CL' ? 'Casual Leave' : ($item['leave_type'] == 'SL' ? 'Sick Leave' : 'Special Leave'));
-                    $sheet->setCellValue($col++, \Carbon\Carbon::parse($item['from_date'])->format('d/m/Y'));
-                    $sheet->setCellValue($col++, \Carbon\Carbon::parse($item['to_date'])->format('d/m/Y'));
-                    $sheet->setCellValue($col++, $item['total_days']);
-                    $sheet->setCellValue($col++, $item['reason'] ?? 'N/A');
-                    $sheet->setCellValue($col++, ucfirst($item['status']));
-                } elseif ($reportType == 'Employee List') {
-                    $sheet->setCellValue($col++, $index + 1);
-                    $sheet->setCellValue($col++, $item['employee_id']);
-                    $sheet->setCellValue($col++, $item['full_name']);
-                    $sheet->setCellValue($col++, $item['employee_type']);
-                    $sheet->setCellValue($col++, $item['department'] ?? 'N/A');
-                    $sheet->setCellValue($col++, $item['designation'] ?? 'N/A');
-                    $sheet->setCellValue($col++, ucfirst($item['status']));
-                } elseif ($reportType == 'Payroll Report') {
-                    $sheet->setCellValue($col++, $index + 1);
-                    $sheet->setCellValue($col++, $item['employee']['full_name'] ?? 'N/A');
-                    $sheet->setCellValue($col++, $item['month'] . ' ' . $item['year']);
-                    $sheet->setCellValue($col++, $item['basic_salary']);
-                    $sheet->setCellValue($col++, $item['total_earnings']);
-                    $sheet->setCellValue($col++, $item['total_deductions']);
-                    $sheet->setCellValue($col++, $item['salary_payable']);
+
+                    $sheet->setCellValue($col++ . $row, $index + 1);
+                    $sheet->setCellValue($col++ . $row, $item['employee']['full_name'] ?? 'N/A');
+                    $sheet->setCellValue($col++ . $row, $item['employee']['employee_type'] ?? 'N/A');
+                    $sheet->setCellValue($col++ . $row, $item['employee']['department'] ?? 'N/A');
+                    $sheet->setCellValue(
+                        $col++ . $row,
+                        $item['leave_type'] == 'CL'
+                            ? 'Casual Leave'
+                            : ($item['leave_type'] == 'SL'
+                                ? 'Sick Leave'
+                                : 'Special Leave')
+                    );
+                    $sheet->setCellValue($col++ . $row, \Carbon\Carbon::parse($item['from_date'])->format('d/m/Y'));
+                    $sheet->setCellValue($col++ . $row, \Carbon\Carbon::parse($item['to_date'])->format('d/m/Y'));
+                    $sheet->setCellValue($col++ . $row, $item['total_days'] ?? 0);
+                    $sheet->setCellValue($col++ . $row, $item['reason'] ?? 'N/A');
+                    $sheet->setCellValue($col++ . $row, ucfirst($item['status'] ?? ''));
                 }
+
+                elseif ($reportType == 'Employee List') {
+
+                    $sheet->setCellValue($col++ . $row, $index + 1);
+                    $sheet->setCellValue($col++ . $row, $item['employee_id'] ?? 'N/A');
+                    $sheet->setCellValue($col++ . $row, $item['full_name'] ?? 'N/A');
+                    $sheet->setCellValue($col++ . $row, $item['employee_type'] ?? 'N/A');
+                    $sheet->setCellValue($col++ . $row, $item['department'] ?? 'N/A');
+                    $sheet->setCellValue($col++ . $row, $item['designation'] ?? 'N/A');
+                    $sheet->setCellValue($col++ . $row, ucfirst($item['status'] ?? ''));
+                }
+
+                elseif ($reportType == 'Payroll Report') {
+
+                    $sheet->setCellValue($col++ . $row, $index + 1);
+                    $sheet->setCellValue($col++ . $row, $item['employee']['full_name'] ?? 'N/A');
+                    $sheet->setCellValue(
+                        $col++ . $row,
+                        ($item['month'] ?? '') . ' ' . ($item['year'] ?? '')
+                    );
+                    $sheet->setCellValue($col++ . $row, $item['basic_salary'] ?? 0);
+                    $sheet->setCellValue($col++ . $row, $item['total_earnings'] ?? 0);
+                    $sheet->setCellValue($col++ . $row, $item['total_deductions'] ?? 0);
+                    $sheet->setCellValue($col++ . $row, $item['salary_payable'] ?? 0);
+                }
+
                 $row++;
             }
 
+
+
+
+
+
+
+            //    echo 'aaa'; die();
             // Auto-size columns
-            foreach (range('A', $col) as $columnID) {
-                $sheet->getColumnDimension($columnID)->setAutoSize(true);
-            }
+           $lastColumn = chr(ord('A') + count($headers) - 1);
+
+           foreach (range('A', $lastColumn) as $columnID) {
+               $sheet->getColumnDimension($columnID)->setAutoSize(true);
+           }
+
 
             $writer = new Xlsx($spreadsheet);
             $filename = 'report-' . strtolower(str_replace(' ', '-', $reportType)) . '-' . date('Y-m-d') . '.xlsx';
+
+
             $filePath = storage_path('app/temp/' . $filename);
             
             if (!file_exists(storage_path('app/temp'))) {

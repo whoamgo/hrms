@@ -29,14 +29,14 @@ class PaymentDisbursementController extends Controller
             
             $query = Employee::where('status', 'active');
             
-            if ($roleSlug) {
-                $role = Role::where('slug', $roleSlug)->first();
-                if ($role) {
-                    $query->whereHas('user', function($q) use ($role) {
-                        $q->where('role_id', $role->id);
-                    });
-                }
-            }
+            // if ($roleSlug) {
+            //     $role = Role::where('slug', $roleSlug)->first();
+            //     if ($role) {
+            //         $query->whereHas('user', function($q) use ($role) {
+            //             $q->where('role_id', $role->id);
+            //         });
+            //     }
+            // }
             
             $employees = $query->get();
 

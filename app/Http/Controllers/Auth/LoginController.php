@@ -16,9 +16,11 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
+         //abort(419, 'You do not have a role assigned.');
         if (Auth::check()) {
             return redirect()->route('dashboard');
         }
+
         return view('auth.login');
     }
 
@@ -65,7 +67,7 @@ class LoginController extends Controller
 
                 $user = Auth::user();
 
-                // 4️⃣ Contract expiration check
+                //Contract expiration check
                 if ($user->employee) {
                     $employee = $user->employee;
 
@@ -85,29 +87,29 @@ class LoginController extends Controller
                     }
                 }
 
-                // 5️⃣ Single session enforcement
+                // Single session enforcement
                 if ($user->session_id) {
                     \DB::table('sessions')->where('id', $user->session_id)->delete();
                 }
 
-                // 6️⃣ Regenerate session
+                // Regenerate session
                 $request->session()->regenerate();
                 $sessionId = $request->session()->getId();
 
-                // 7️⃣ Update login timestamps & session
+                // Update login timestamps & session
                 $user->session_id = $sessionId;
                 $user->last_login_at = $user->current_login_at;
                 $user->current_login_at = now();
                 $user->save();
 
-                // 8️⃣ Log activity
+                // Log activity
                 \App\Helpers\ActivityLogHelper::log(
                     'login',
                     null,
                     "User {$user->name} logged in"
                 );
 
-                // 9️⃣ Clear cached menu
+                // Clear cached menu
                 Cache::forget('user_menu_' . $user->id);
 
                 //Redirect based on role

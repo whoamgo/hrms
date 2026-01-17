@@ -87,9 +87,9 @@
                     <button type="button" class="btn btn-dropbox waves-effect waves-light flexbtn" id="export-pdf-btn">
                         <span class="btn-label"><i class="mdi mdi-file-pdf"></i></span>Export PDF
                     </button>
-                  <!--   <button type="button" class="btn btn-dropbox waves-effect waves-light flexbtn" id="export-excel-btn">
+                     <button type="button" class="btn btn-dropbox waves-effect waves-light flexbtn" id="export-excel-btn">
                         <span class="btn-label"><i class="mdi mdi-file-excel-outline"></i></span>Export Excel
-                    </button> -->
+                    </button> 
                 </div>
             </div>
             <div class="table-responsive">

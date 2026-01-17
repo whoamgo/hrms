@@ -235,8 +235,8 @@
                     @if($employee->user)
                     <div class="col-xl-3 col-md-4">
                         <div class="form-group">
-                            <label>Linked User Account</label>
-                            <input type="text" class="form-control" value="{{ $employee->user->name }} ({{ $employee->user->email }})" readonly>
+                            <label>User Account</label>
+                            <input type="text" class="form-control" value="{{ $employee->user->email }}" readonly>
                             <small class="form-text text-muted">Username: {{ $employee->user->username }} | Role: {{ $employee->user->role->name ?? 'N/A' }}</small>
                         </div>
                     </div>

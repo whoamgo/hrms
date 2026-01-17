@@ -221,9 +221,9 @@ class UserController extends Controller
     {
         try {
             $roles = Cache::remember('all_roles', 3600, function() {
-                return Role::where('is_active', true)->get();
+                return Role::where('is_active', true)->where('slug','!=','employee')->get();
             });
-
+           // echo "<pre>"; print_r($roles); die();
             return view('admin.users.edit', compact('user', 'roles'));
         } catch (\Exception $e) {
             return redirect()->route('admin.users.index')->with('error', 'Error loading form: ' . $e->getMessage());

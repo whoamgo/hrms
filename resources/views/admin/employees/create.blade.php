@@ -205,7 +205,7 @@
                     </div>
                 </div>
 
-                <h5 class="input_top_hd">User Account (Auto-created)</h5>
+                <h5 class="input_top_hd">User Account</h5>
                 <div class="row">
                     <div class="col-xl-4 col-md-4">
                         <div class="form-group">

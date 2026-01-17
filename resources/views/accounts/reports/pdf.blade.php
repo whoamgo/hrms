@@ -5,7 +5,7 @@
     <title>{{ $reportType }} - {{ date('Y-m-d') }}</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "DejaVu Sans", sans-serif;
             margin: 20px;
         }
         table {

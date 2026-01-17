@@ -3,7 +3,7 @@
 <head>
     <title>Payslip - {{ $payslip->month }} {{ $payslip->year }}</title>
     <style>
-        body { font-family: Arial, sans-serif; }
+        body { font-family: "DejaVu Sans", sans-serif; }
         .header { text-align: center; margin-bottom: 20px; }
         .payslip-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         .payslip-table th, .payslip-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
