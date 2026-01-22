@@ -88,6 +88,8 @@
             // Login form submission
             $('#login-form').on('submit', function(e) {
                 e.preventDefault();
+
+                
                 
                 var form = $(this);
                 var submitBtn = form.find('button[type="submit"]');

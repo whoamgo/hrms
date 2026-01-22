@@ -18,7 +18,7 @@ class PayrollController extends Controller
     {
         try {
             $roles = Cache::remember('all_roles', 3600, function() {
-                return Role::where('is_active', true)->get();
+                return Role::where('is_active', true)->where('slug','employee')->get();
             });
             return view('accounts.payroll.index', compact('roles'));
         } catch (\Exception $e) {

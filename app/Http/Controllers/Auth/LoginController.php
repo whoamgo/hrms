@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
-
+//  
 class LoginController extends Controller
 {
     /**
@@ -16,7 +16,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-         //abort(419, 'You do not have a role assigned.');
+         //abort(403, 'You do not have a role assigned.');
         if (Auth::check()) {
             return redirect()->route('dashboard');
         }

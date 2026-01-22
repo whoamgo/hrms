@@ -347,7 +347,7 @@ $(document).ready(function() {
     });
 
 
-var payrollEditUrl = "{{ route('admin.payroll.edit', ':id') }}";
+    var payrollEditUrl = "{{ route('admin.payroll.edit', ':id') }}";
     // Edit Payslip
     $(document).on('click', '.edit-payslip', function() {
         var id = $(this).data('id');
@@ -371,7 +371,6 @@ var payrollEditUrl = "{{ route('admin.payroll.edit', ':id') }}";
 
         var payrollViewUrl = "{{ route('admin.payroll.show', ':id') }}";
         payrollViewUrl = payrollViewUrl.replace(':id', id);
-
 
 
         if (confirm('Are you sure you want to delete this payslip ?')) {

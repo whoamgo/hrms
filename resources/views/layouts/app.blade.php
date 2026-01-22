@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
     <!-- Bootstrap Timepicker CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css" />
+    <!-- Toastr -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
     <style>
         /* Date input with icon */
         .date-input-wrapper {
@@ -208,6 +211,9 @@
     <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
     
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <!-- Bootstrap Datepicker JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <!-- Bootstrap Timepicker JS -->
@@ -215,9 +221,24 @@
     
     <!-- AJAX Form Handler -->
     <script src="{{ asset('js/ajax-form.js') }}"></script>
-    
+  
+
     <!-- Custom JS -->
     <script>
+
+    toastr.options = {
+        closeButton: true,
+        progressBar: true,
+        positionClass: "toast-top-right",
+        timeOut: 3000,
+        extendedTimeOut: 1000,
+        preventDuplicates: true,   // 🔥 IMPORTANT
+        newestOnTop: true,
+        showDuration: 300,
+        hideDuration: 300,
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut"
+    };
 
  
         document.getElementById('clearCacheBtn').addEventListener('click', function () {
