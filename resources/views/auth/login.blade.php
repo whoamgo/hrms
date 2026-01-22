@@ -27,7 +27,7 @@
                                             <span><img src="{{ asset('assets/images/logo.png') }}" alt="" height="auto"></span>
                                         </a>
                                     </div>
-                                    <h5 class="text-muted text-uppercase py-3 font-16">Sign In</h5>
+                                    <h5 class="text-muted text-uppercase py-3 font-16">Sign In <hr/></h5>
                                 </div>
     
                                 <form id="login-form" class="mt-2">
