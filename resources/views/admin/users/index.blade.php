@@ -247,14 +247,17 @@ $(document).ready(function() {
                             $('.alert').fadeOut(function() { $(this).remove(); });
                         }, 3000);
                     } else {
-                        alert(response.message);
+                        //alert(response.message);
+                        toastr.error(response.message);
                     }
                     deleteUserId = null;
                 },
                 error: function(xhr) {
                     $('#deleteUserModal').modal('hide');
                     var message = xhr.responseJSON?.message || 'Error deleting user.';
-                    alert(message);
+                    //alert(message);
+                    toastr.error(message);
+
                     deleteUserId = null;
                 }
             });

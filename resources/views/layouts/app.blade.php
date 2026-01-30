@@ -12,12 +12,12 @@
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" type="text/css" id="app-stylesheet" />
     <!-- Bootstrap Datepicker CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha384-5IbgsdqrjF6rAX1mxBZkKRyUOgEr0/xCGkteJIaRKpvW0Ag0tf6lru4oL2ZhcMvo" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datepicker.min.css') }}" integrity="sha384-5IbgsdqrjF6rAX1mxBZkKRyUOgEr0/xCGkteJIaRKpvW0Ag0tf6lru4oL2ZhcMvo" crossorigin="anonymous">
     <!-- Bootstrap Timepicker CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/css/bootstrap-timepicker.min.css" integrity="sha384-nLzLnfaWi3Ujpb0PFRLqdV4G3JN644XICJLid2lSwVICK0giayOdnsScYbeiDlu8" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-timepicker.min.css') }}" integrity="sha384-nLzLnfaWi3Ujpb0PFRLqdV4G3JN644XICJLid2lSwVICK0giayOdnsScYbeiDlu8" crossorigin="anonymous">
 
     <!-- Toastr -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha384-R334r6kryDNB/GWs2kfB6blAOyWPCxjdHSww/mo7fel+o5TM/AOobJ0QpGRXSDh4" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}" integrity="sha384-R334r6kryDNB/GWs2kfB6blAOyWPCxjdHSww/mo7fel+o5TM/AOobJ0QpGRXSDh4" crossorigin="anonymous">
 
     <style>
         /* Date input with icon */
@@ -213,12 +213,12 @@
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
     
     <!-- Toastr JS -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha384-Si3HKTyQYGU+NC4aAF3ThcOSvK+ZQiyEKlYyfjiIFKMqsnCmfHjGa1VK1kYP9UdS" crossorigin="anonymous"></script>
+   <script src="{{ asset('assets/js/toastr.min.js') }}" integrity="sha384-Si3HKTyQYGU+NC4aAF3ThcOSvK+ZQiyEKlYyfjiIFKMqsnCmfHjGa1VK1kYP9UdS" crossorigin="anonymous"></script>
 
     <!-- Bootstrap Datepicker JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha384-duAtk5RV7s42V6Zuw+tRBFcqD8RjRKw6RFnxmxIj1lUGAQJyum/vtcUQX8lqKQjp" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/js/bootstrap-datepicker.min.js') }}" integrity="sha384-duAtk5RV7s42V6Zuw+tRBFcqD8RjRKw6RFnxmxIj1lUGAQJyum/vtcUQX8lqKQjp" crossorigin="anonymous"></script>
     <!-- Bootstrap Timepicker JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-timepicker/0.5.2/js/bootstrap-timepicker.min.js" integrity="sha384-j0kMAC9Ymu1pP+W9AURKMmsgAhiaJJCdBKGCqmpXMdeaOz+T1y6vHtcUlrobCB6G" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/js/bootstrap-timepicker.min.js') }}"  integrity="sha384-j0kMAC9Ymu1pP+W9AURKMmsgAhiaJJCdBKGCqmpXMdeaOz+T1y6vHtcUlrobCB6G" crossorigin="anonymous"></script>
     
     <!-- AJAX Form Handler -->
     <script src="{{ asset('js/ajax-form.js') }}"></script>
@@ -285,7 +285,8 @@
                         }
                     },
                     error: function() {
-                        alert('Error during logout. Please try again.');
+                        toastr.error('Error during logout. Please try again.');
+                        //alert('Error during logout. Please try again.');
                     }
                 });
             }

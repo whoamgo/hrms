@@ -121,7 +121,8 @@ $(document).ready(function() {
                 }
             },
             error: function() {
-                alert('Error marking notification as read.');
+                toastr.error('Error marking notification as read.');
+                ///alert('Error marking notification as read.');
             }
         });
     });
@@ -145,7 +146,8 @@ $(document).ready(function() {
                 }
             },
             error: function() {
-                alert('Error marking all notifications as read.');
+                toastr.error('Error marking notification as read.');
+                //alert('Error marking all notifications as read.');
                 btn.prop('disabled', false);
             }
         });

@@ -322,13 +322,15 @@ $(document).ready(function() {
                     $('#deleteServiceRecordModal').modal('hide');
                     if (response.success) {
                         table.draw();
-                        alert(response.message);
+                        toastr.success(response.message);
+                        //alert(response.message);
                     }
                     deleteServiceRecordId = null;
                 },
                 error: function(xhr) {
                     $('#deleteServiceRecordModal').modal('hide');
-                    alert('Error deleting service record.');
+                    toastr.error('Error deleting service record.');
+                    //alert('Error deleting service record.');
                     deleteServiceRecordId = null;
                 }
             });

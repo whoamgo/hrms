@@ -442,12 +442,12 @@ $(document).ready(function() {
     $('#confirmDeleteEmployee').on('click', function() {
         if (deleteEmployeeId) {
 
-            // var employeeViewUrl = "{{ route('admin.employees.toggle-status', ':id') }}";
-            // employeeViewUrl = employeeViewUrl.replace(':id', deleteEmployeeId);
+            var deleteViewUrl = "{{ route('admin.employees.show', ':id') }}";
+            deleteViewUrl = deleteViewUrl.replace(':id', deleteEmployeeId);
 
             
             $.ajax({
-                url: '/admin/employees/' + deleteEmployeeId,
+                url:deleteViewUrl,
                 type: 'DELETE',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -465,14 +465,16 @@ $(document).ready(function() {
                             $('.alert').fadeOut(function() { $(this).remove(); });
                         }, 3000);
                     } else {
-                        alert(response.message);
+                         toastr.error(response.message);
+                        //alert(response.message);
                     }
                     deleteEmployeeId = null;
                 },
                 error: function(xhr) {
                     $('#deleteEmployeeModal').modal('hide');
                     var message = xhr.responseJSON?.message || 'Error deleting employee.';
-                    alert(message);
+                    //alert(message);
+                    toastr.error(message);
                     deleteEmployeeId = null;
                 }
             });
@@ -498,16 +500,19 @@ $(document).ready(function() {
             },
             success: function(response) {
                 if (response.success) {
+                    toastr.success(response.message);
                     // Status updated successfully
                 } else {
-                    alert(response.message);
+                    toastr.error(response.message);
+                    //alert(response.message);
                     // Revert toggle
                     $('.status-toggle[data-id="' + employeeId + '"]').prop('checked', !isChecked);
                 }
             },
             error: function(xhr) {
                 var message = xhr.responseJSON?.message || 'Error updating status.';
-                alert(message);
+                toastr.error(message);
+                //alert(message);
                 // Revert toggle
                 $('.status-toggle[data-id="' + employeeId + '"]').prop('checked', !isChecked);
             }

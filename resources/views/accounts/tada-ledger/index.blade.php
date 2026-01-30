@@ -211,7 +211,8 @@ $(document).ready(function() {
                 },
                 success: function(response) {
                     if (response.success) {
-                        alert(response.message);
+                        toastr.success(response.message);
+                        //alert(response.message);
                         $('#viewModal').modal('hide');
                         table.ajax.reload();
                     }
@@ -243,7 +244,8 @@ $(document).ready(function() {
             },
             success: function(response) {
                 if (response.success) {
-                    alert(response.message);
+                    toastr.success(response.message);
+                    //alert(response.message);
                     $('#rejectModal').modal('hide');
                     $('#viewModal').modal('hide');
                     $('#reject-form')[0].reset();

@@ -59,7 +59,7 @@
         </table>
     </div>
 </div>
-
+<!-- 
 @if($tadaClaim->status == 'pending')
 <div class="row mt-3">
     <div class="col-md-12">
@@ -67,22 +67,28 @@
         <button class="btn btn-danger reject-claim-btn" data-id="{{ $tadaClaim->getRouteKey() }}">Reject</button>
     </div>
 </div>
-@endif
+@endif -->
 
 <script>
 $(document).ready(function() {
     $('.approve-claim-btn').on('click', function() {
         var id = $(this).data('id');
         if (confirm('Are you sure you want to approve this claim?')) {
+
+            var url = "{{ route('admin.tada-claims.approve', ':id') }}";   
+            var url = url.replace(':id', id);
+
+
             $.ajax({
-                url: '/admin/tada-claims/' + id + '/approve',
+                url: url,
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
                     if (response.success) {
-                        alert(response.message);
+                        toastr.success(response.message);
+                       // alert(response.message);
                         $('#viewModal').modal('hide');
                         $('#tada-claims-table').DataTable().ajax.reload();
                     }
@@ -95,8 +101,14 @@ $(document).ready(function() {
         var id = $(this).data('id');
         var reason = prompt('Please enter rejection reason:');
         if (reason) {
+
+            var url = "{{ route('admin.tada-claims.reject', ':id') }}";   
+            var url = url.replace(':id', id);
+
+
+
             $.ajax({
-                url: '/admin/tada-claims/' + id + '/reject',
+                url: url,
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
@@ -104,7 +116,8 @@ $(document).ready(function() {
                 },
                 success: function(response) {
                     if (response.success) {
-                        alert(response.message);
+                        toastr.success(response.message);
+                       // alert(response.message);
                         $('#viewModal').modal('hide');
                         $('#tada-claims-table').DataTable().ajax.reload();
                     }

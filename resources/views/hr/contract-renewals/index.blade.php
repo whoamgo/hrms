@@ -189,7 +189,8 @@ $(document).ready(function() {
                 },
                 success: function(response) {
                     if (response.success) {
-                        alert(response.message);
+                        toastr.success(response.message);
+                        //alert(response.message);
                         table.ajax.reload();
                     }
                 }
@@ -222,7 +223,8 @@ $(document).ready(function() {
             data: form.serialize() + '&_token={{ csrf_token() }}',
             success: function(response) {
                 if (response.success) {
-                    alert(response.message);
+                    toastr.success(response.message);
+                    //alert(response.message);
                     $('#renewModal').modal('hide');
                     form[0].reset();
                     table.ajax.reload();

@@ -405,7 +405,8 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 if (response.success) {
-                    alert(response.message);
+                    toastr.success(response.message);
+                    //alert(response.message);
                     $('#generatePayslipModal').modal('hide');
                     form[0].reset();
                     $('.error-text').text('');

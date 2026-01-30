@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
-
+use Auth;
 class EmployeeController extends Controller
 {
     /**
@@ -570,22 +570,53 @@ class EmployeeController extends Controller
     public function toggleStatus(Employee $employee)
     {
         try {
-            $employee->status = $employee->status === 'active' ? 'inactive' : 'active';
+            DB::beginTransaction();
+
+            // Toggle status
+            $newStatus = $employee->status === 'active' ? 'inactive' : 'active';
+
+            // Update employee
+            $employee->status = $newStatus;
             $employee->save();
+
+            // Update related user
+            User::where('id', $employee->user_id)
+                ->update(['status' => $newStatus]);
+
+            //If user is being inactivated & currently logged in → logout
+            if ($newStatus === 'inactive') {
+
+                if (Auth::check() && Auth::id() == $employee->user_id) {
+                    Auth::logout();
+
+                    request()->session()->invalidate();
+                    request()->session()->regenerateToken();
+                }
+
+                // Optional: remove all sessions of that user (for multi-device logout)
+                DB::table('sessions')
+                    ->where('user_id', $employee->user_id)
+                    ->delete();
+            }
+
+            DB::commit();
 
             return response()->json([
                 'success' => true,
                 'message' => 'Employee status updated successfully.',
-                'status' => $employee->status
+                'status'  => $newStatus
             ]);
 
         } catch (\Exception $e) {
+            DB::rollBack();
+
             return response()->json([
                 'success' => false,
                 'message' => 'Error updating status: ' . $e->getMessage()
             ], 500);
         }
     }
+
 
     /**
      * Get autocomplete suggestions for Employee ID

@@ -1,10 +1,5 @@
 <?php
-
- 
-
-
 namespace App\Helpers;
-
 use App\Models\User;
 use App\Notifications\GeneralNotification;
 use Illuminate\Support\Facades\Notification;

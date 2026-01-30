@@ -460,14 +460,16 @@ $(document).ready(function() {
                             $('.alert').fadeOut(function() { $(this).remove(); });
                         }, 3000);
                     } else {
-                        alert(response.message);
+                        toastr.error(response.message);
+                        //alert(response.message);
                     }
                     deleteEmployeeId = null;
                 },
                 error: function(xhr) {
                     $('#deleteEmployeeModal').modal('hide');
                     var message = xhr.responseJSON?.message || 'Error deleting employee.';
-                    alert(message);
+                    //alert(message);
+                    toastr.error(message);
                     deleteEmployeeId = null;
                 }
             });
@@ -498,16 +500,18 @@ $(document).ready(function() {
             },
             success: function(response) {
                 if (response.success) {
+                    toastr.success(response.message);
                     // Status updated successfully
                 } else {
-                    alert(response.message);
+                    toastr.error(response.message);
                     // Revert toggle
                     $('.status-toggle[data-id="' + employeeId + '"]').prop('checked', !isChecked);
                 }
             },
             error: function(xhr) {
-                var message = xhr.responseJSON?.message || 'Error updating status.';
-                alert(message);
+                 var message = xhr.responseJSON?.message || 'Error updating status.';
+                // alert(message);
+                toastr.success(message);
                 // Revert toggle
                 $('.status-toggle[data-id="' + employeeId + '"]').prop('checked', !isChecked);
             }

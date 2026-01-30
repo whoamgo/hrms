@@ -145,7 +145,8 @@ $(document).ready(function() {
             data: formData + '&_token={{ csrf_token() }}',
             success: function(response) {
                 if (response.success) {
-                    alert(response.message);
+                    toastr.success(response.message);
+                    //alert(response.message);
                     window.location.href = response.redirect || '{{ route("admin.payroll.index") }}';
                 }
             },

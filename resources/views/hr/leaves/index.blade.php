@@ -353,11 +353,13 @@ $(document).ready(function() {
                 success: function(response) {
                     if (response.success) {
                         table.draw();
-                        alert(response.message);
+                        toastr.success(response.message);
+                      //  alert(response.message);
                     }
                 },
                 error: function(xhr) {
-                    alert('Error approving leave.');
+                    toastr.error('Error apprving leave.');
+                    //alert('Error approving leave.');
                 }
             });
         }
@@ -384,18 +386,21 @@ $(document).ready(function() {
                     $('#rejectLeaveModal').modal('hide');
                     if (response.success) {
                         table.draw();
-                        alert(response.message);
+                        toastr.success(response.message);
+                        //alert(response.message);
                     }
                     rejectLeaveId = null;
                 },
                 error: function(xhr) {
                     var message = xhr.responseJSON?.message || 'Error rejecting leave.';
-                    alert(message);
+                    //alert(message);
+                    toastr.success(message);
                     rejectLeaveId = null;
                 }
             });
         } else {
-            alert('Please provide a rejection reason.');
+            toastr.error('Please provide a rejection reason');
+            //alert('Please provide a rejection reason.');
         }
     });
 
@@ -406,21 +411,27 @@ $(document).ready(function() {
 
     $('#confirmDeleteLeave').on('click', function() {
         if (deleteLeaveId) {
+
+            var deleteUrl = "{{ route('hr.leaves.show', ':id') }}";
+            deleteUrl = deleteUrl.replace(':id', deleteLeaveId);
+
+
             $.ajax({
-                url: '/hr/leaves/' + deleteLeaveId,
+                url: deleteUrl,
                 type: 'DELETE',
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 success: function(response) {
                     $('#deleteLeaveModal').modal('hide');
                     if (response.success) {
                         table.draw();
-                        alert(response.message);
+                        toastr.success(response.message);
+                        //alert(response.message);
                     }
                     deleteLeaveId = null;
                 },
                 error: function(xhr) {
                     $('#deleteLeaveModal').modal('hide');
-                    alert('Error deleting leave.');
+                    toastr.error('Error deleting leave.');
                     deleteLeaveId = null;
                 }
             });

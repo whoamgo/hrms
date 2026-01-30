@@ -351,11 +351,13 @@ $(document).ready(function() {
                 success: function(response) {
                     if (response.success) {
                         table.draw();
-                        alert(response.message);
+                        toastr.success(response.message);
+                       // alert(response.message);
                     }
                 },
                 error: function(xhr) {
-                    alert('Error approving leave.');
+                    toastr.error('Error approving leave');
+                    //alert('.');
                 }
             });
         }
@@ -382,18 +384,21 @@ $(document).ready(function() {
                     $('#rejectLeaveModal').modal('hide');
                     if (response.success) {
                         table.draw();
-                        alert(response.message);
+                        toastr.success(response.message);
+                        //alert(response.message);
                     }
                     rejectLeaveId = null;
                 },
                 error: function(xhr) {
                     var message = xhr.responseJSON?.message || 'Error rejecting leave.';
-                    alert(message);
+                    toastr.error(message);
+                    //alert(message);
                     rejectLeaveId = null;
                 }
             });
         } else {
-            alert('Please provide a rejection reason.');
+            toastr.error('Please provide a rejection reason.');
+            //alert('.');
         }
     });
 
@@ -418,13 +423,15 @@ $(document).ready(function() {
                     $('#deleteLeaveModal').modal('hide');
                     if (response.success) {
                         table.draw();
-                        alert(response.message);
+                        toastr.success(response.message);
+                        //alert(response.message);
                     }
                     deleteLeaveId = null;
                 },
                 error: function(xhr) {
                     $('#deleteLeaveModal').modal('hide');
-                    alert('Error deleting leave.');
+                    toastr.error('Error deleting leave.');
+                    //alert('Error deleting leave.');
                     deleteLeaveId = null;
                 }
             });

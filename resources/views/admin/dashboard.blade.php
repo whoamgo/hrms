@@ -14,15 +14,20 @@
 <!-- end page title --> 
 
 <div class="row">
+
     <div class="col-md-6 col-xl-3">
         <div class="card-box tilebox-one box2">
             <i class="icon-people float-right m-0 h2 text-muted"></i>
             <h6 class="text-muted text-uppercase mt-0">Total Employees</h6>
-            <h3 class="my-3"><span data-plugin="counterup">{{ $stats['total_employees'] ?? 0 }}</span></h3>
+            <h3 class="my-3">
+                <span data-plugin="counterup">{{ $stats['total_employees'] ?? 0 }}</span>
+            </h3>
             <span class="badge badge-success mr-1">Active</span> 
             <span class="text-muted">Currently active employees</span>
         </div>
     </div>
+
+    
     <div class="col-md-6 col-xl-3">
         <div class="card-box tilebox-one box2">
             <i class="icon-layers float-right m-0 h2 text-muted"></i>

@@ -11,9 +11,10 @@ use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\ServiceRecordController;
 use App\Http\Controllers\Admin\LeaveController;
 use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers\Admin\ActivityController;
 
 
-// /amitgii/ 
+ 
 
 // Route::get('/test-mail', function () {
 //     try {
@@ -81,6 +82,10 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('roles', RoleController::class);
         Route::post('roles/{role}/permissions', [RoleController::class, 'updatePermissions'])->name('roles.permissions');
         Route::post('roles/{role}/menu-items', [RoleController::class, 'updateMenuItems'])->name('roles.menu-items');
+
+        // Activity Management
+         Route::resource('activity-logs', ActivityController::class);
+               
         
         // Permission Management
         Route::resource('permissions', PermissionController::class);

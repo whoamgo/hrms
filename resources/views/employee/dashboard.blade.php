@@ -34,27 +34,21 @@
             <i class="icon-layers float-right m-0 h2 text-muted"></i>
             <h6 class="text-muted text-uppercase mt-0">Leave Balance</h6>
             <h3 class="my-3"><span data-plugin="counterup">{{ $stats['leave_balance'] ?? 0 }}</span></h3>
-            <span class="badge badge-danger mr-1"> -29% </span> 
-            <span class="text-muted">From previous period</span>
-        </div>
+         </div>
     </div>
     <div class="col-md-6 col-xl-3">
         <div class="card-box tilebox-one box3">
             <i class="icon-docs float-right m-0 h2 text-muted"></i>
             <h6 class="text-muted text-uppercase mt-0">Latest Payslip</h6>
             <h3 class="my-3"><span data-plugin="counterup">{{ $stats['latest_payslip'] ?? 0 }}</span></h3>
-            <span class="badge badge-pink mr-1"> 0% </span> 
-            <span class="text-muted">From previous period</span>
-        </div>
+          </div>
     </div>
     <div class="col-md-6 col-xl-3">
         <div class="card-box tilebox-one box4">
             <i class="icon-social-dribbble float-right m-0 h2 text-muted"></i>
             <h6 class="text-muted text-uppercase mt-0">Pending TA/DA Claims</h6>
             <h3 class="my-3" data-plugin="counterup">{{ $stats['pending_tada_claims'] ?? 0 }}</h3>
-            <span class="badge badge-warning mr-1"> +89% </span> 
-            <span class="text-muted">Current Month</span>
-        </div>
+         </div>
     </div>
 </div>
 <!-- end row -->

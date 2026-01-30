@@ -106,7 +106,7 @@
 <script src="{{ asset('assets/js/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script>
 $(document).ready(function() {
-    var table = $('#tada-claims-table').DataTable({
+        var table = $('#tada-claims-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: '{{ route("employee.tada-claims.data") }}',

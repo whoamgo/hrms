@@ -337,7 +337,8 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 if (response.success) {
-                    alert(response.message);
+                    toastr.success(response.message);
+                   // alert(response.message);
                     $('#createDisbursementModal').modal('hide');
                     form[0].reset();
                     $('.error-text').text('');
@@ -374,7 +375,8 @@ $(document).ready(function() {
                 $('#viewDisbursementModal').modal('show');
             },
             error: function(xhr) {
-                alert('Error loading disbursement details.');
+                 toastr.error('Error loading disbursement details.');
+             
             }
         });
     });

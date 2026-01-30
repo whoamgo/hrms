@@ -382,7 +382,8 @@ $(document).ready(function() {
                 },
                 success: function(response) {
                     if (response.success) {
-                        alert(response.message);
+                        toastr.success(response.message);
+                        //alert(response.message);
                         table.ajax.reload();
                     }
                 }
@@ -402,7 +403,8 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 if (response.success) {
-                    alert(response.message);
+                    toastr.success(response.message);
+                    //alert(response.message);
                     $('#generatePayslipModal').modal('hide');
                     form[0].reset();
                     $('.error-text').text('');

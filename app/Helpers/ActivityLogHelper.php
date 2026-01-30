@@ -6,7 +6,7 @@ use App\Models\ActivityLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
 
-class ActivityLogHelper
+class ActivityLogHelper 
 {
     /**
      * Log an activity

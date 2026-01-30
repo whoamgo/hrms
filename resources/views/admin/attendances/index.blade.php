@@ -296,13 +296,15 @@ $(document).ready(function() {
                     $('#deleteAttendanceModal').modal('hide');
                     if (response.success) {
                         table.draw();
-                        alert(response.message);
+                        toastr.success(response.message);
+                        //alert(response.message);
                     }
                     deleteAttendanceId = null;
                 },
                 error: function(xhr) {
                     $('#deleteAttendanceModal').modal('hide');
-                    alert('Error deleting attendance.');
+                    toastr.error('Error deleting attendance.');
+                    //alert('');
                     deleteAttendanceId = null;
                 }
             });
